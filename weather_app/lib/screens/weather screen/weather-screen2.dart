@@ -195,7 +195,7 @@ class _WeatherScreen2State extends State<WeatherScreen2> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: hourlyWeatherList.length,
+                      itemCount: 8,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         final hourlyWeather = hourlyWeatherList[index];
