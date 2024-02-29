@@ -6,7 +6,8 @@ import 'package:weather_app/custom%20widgets/background_theme.dart';
 import 'package:weather_app/custom%20widgets/custom_text.dart';
 
 class WeatherScreen2 extends StatefulWidget {
-  const WeatherScreen2({Key? key}) : super(key: key);
+  final String location;
+  const WeatherScreen2({Key? key, required this.location}) : super(key: key);
 
   @override
   _WeatherScreen2State createState() => _WeatherScreen2State();
@@ -15,8 +16,8 @@ class WeatherScreen2 extends StatefulWidget {
 class _WeatherScreen2State extends State<WeatherScreen2> {
   final String _apiKey =
       'a2417be31b0961445dcfbbac499c0920'; // Replace with your actual API key
-  final String _city =
-      'Dambulla'; // Replace with the city you want weather information for
+  late final String _city =
+      widget.location; // Replace with the city you want weather information for
 
   Future<Map<String, dynamic>> fetchWeather() async {
     final response = await http.get(Uri.parse(

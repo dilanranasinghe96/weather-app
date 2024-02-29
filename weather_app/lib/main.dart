@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'screens/weather screen/weather-screen2.dart';
+import 'package:weather_app/screens/splash%20screen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Weather App',
       debugShowCheckedModeBanner: false,
-      home: WeatherScreen2(),
+      home: SplashScreen(),
     );
   }
 }

@@ -13,8 +13,8 @@ class BackgroundThme extends StatelessWidget {
         height: size.height,
         decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 5, 18, 106),
-          Color.fromARGB(255, 78, 4, 91)
+          Color.fromRGBO(69, 104, 220, 1),
+          Color.fromRGBO(176, 106, 179, 1)
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: child);
   }
