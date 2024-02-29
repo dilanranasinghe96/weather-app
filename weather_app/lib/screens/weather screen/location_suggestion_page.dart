@@ -80,31 +80,34 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * 0.25,
-              ),
-              ElevatedButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.amber),
-                ),
-                onPressed: () async {
-                  String nearestCity = await _getNearestCity();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          WeatherScreen2(location: nearestCity),
-                    ),
-                  );
-                },
-                child: CustomPoppinsText(
-                  text: 'Continue',
-                  color: Colors.black,
-                  fsize: 20,
-                  fweight: FontWeight.w500,
-                ),
+                height: size.height * 0.3,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.amber),
+                  ),
+                  onPressed: () async {
+                    String nearestCity = await _getNearestCity();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            WeatherScreen2(location: nearestCity),
+                      ),
+                    );
+                  },
+                  child: CustomPoppinsText(
+                    text: 'Current location',
+                    color: Colors.black,
+                    fsize: 18,
+                    fweight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: size.width * 0.75,
                 child: Row(
                   children: [
                     const Expanded(child: Divider()),
@@ -113,7 +116,7 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                       child: CustomPoppinsText(
                         text: "OR",
                         color: Colors.white,
-                        fsize: 18,
+                        fsize: 16,
                         fweight: FontWeight.w500,
                       ),
                     ),
@@ -123,25 +126,36 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                   ],
                 ),
               ),
-              SizedBox(
-                width: size.width * 0.75,
-                height: 55,
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  cursorColor: Colors.white,
-                  controller: _controller,
-                  onChanged: (value) {
-                    _fetchLocationSuggestions(value);
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(45)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: size.width * 0.75,
+                  height: 55,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 2),
+                      gradient: const LinearGradient(colors: [
+                        Color.fromRGBO(69, 104, 220, 1),
+                        Color.fromRGBO(176, 106, 179, 1)
+                      ]),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(45))),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    cursorColor: Colors.white,
+                    controller: _controller,
+                    onChanged: (value) {
+                      _fetchLocationSuggestions(value);
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(45)),
+                      ),
+                      hintText: 'Enter location',
+                      hintStyle: TextStyle(color: Colors.grey),
                     ),
-                    hintText: 'Enter location',
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                  style: const TextStyle(
-                    color: Colors.white,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -158,6 +172,7 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                                 WeatherScreen2(location: _suggestions[index]),
                           ),
                         );
+                        _controller.clear();
                       },
                       child: ListTile(
                         title: Text(
