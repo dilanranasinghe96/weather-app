@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/custom%20widgets/custom_button.dart';
 import 'package:weather_app/custom%20widgets/custom_text.dart';
-import 'package:weather_app/screens/weather%20screen/location_suggestion_page.dart';
+import 'package:weather_app/screens/weather%20screen/home_page.dart';
 
 import '../../custom widgets/background_theme.dart';
 
@@ -42,14 +42,17 @@ class SplashScreen extends StatelessWidget {
             height: size.height * 0.1,
           ),
           CustomButton(
+              bHeight: size.height * 0.08,
+              bWidth: size.width * 0.6,
               size: size,
               ontap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LocationSuggestionsPage(),
+                      builder: (context) => const HomePage(),
                     ));
               },
+              fSize: 25,
               text: 'Get Started',
               buttonColor: Colors.amber,
               textColor: Colors.black)

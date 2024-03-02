@@ -5,18 +5,18 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/custom%20widgets/background_theme.dart';
+import 'package:weather_app/custom%20widgets/custom_button.dart';
 import 'package:weather_app/custom%20widgets/custom_text.dart';
-import 'package:weather_app/screens/weather%20screen/weather-screen2.dart';
+import 'package:weather_app/screens/weather%20screen/weather-screen.dart';
 
-class LocationSuggestionsPage extends StatefulWidget {
-  const LocationSuggestionsPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _LocationSuggestionsPageState createState() =>
-      _LocationSuggestionsPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
   List<String> _suggestions = [];
 
@@ -83,29 +83,25 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                 height: size.height * 0.3,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.amber),
-                  ),
-                  onPressed: () async {
-                    String nearestCity = await _getNearestCity();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            WeatherScreen2(location: nearestCity),
-                      ),
-                    );
-                  },
-                  child: CustomPoppinsText(
-                    text: 'Current location',
-                    color: Colors.black,
-                    fsize: 18,
-                    fweight: FontWeight.w500,
-                  ),
-                ),
-              ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomButton(
+                      size: size,
+                      ontap: () async {
+                        String nearestCity = await _getNearestCity();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                WeatherScreen(location: nearestCity),
+                          ),
+                        );
+                      },
+                      fSize: 20,
+                      text: 'Current location',
+                      buttonColor: Colors.amber,
+                      textColor: Colors.black,
+                      bHeight: size.height * 0.06,
+                      bWidth: size.width * 0.6)),
               SizedBox(
                 width: size.width * 0.75,
                 child: Row(
@@ -130,15 +126,12 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: size.width * 0.75,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2),
-                      gradient: const LinearGradient(colors: [
-                        Color.fromRGBO(69, 104, 220, 1),
-                        Color.fromRGBO(176, 106, 179, 1)
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color.fromRGBO(35, 80, 227, 0.486),
+                        Color.fromRGBO(173, 45, 177, 0.486)
                       ]),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(45))),
+                      borderRadius: BorderRadius.all(Radius.circular(45))),
                   child: TextField(
                     textAlign: TextAlign.center,
                     cursorColor: Colors.white,
@@ -147,11 +140,19 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                       _fetchLocationSuggestions(value);
                     },
                     decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(45)),
+                      prefixIcon: Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.grey,
                       ),
-                      hintText: 'Enter location',
-                      hintStyle: TextStyle(color: Colors.grey),
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Search',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
                     style: const TextStyle(
                       color: Colors.white,
@@ -169,7 +170,7 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                WeatherScreen2(location: _suggestions[index]),
+                                WeatherScreen(location: _suggestions[index]),
                           ),
                         );
                         _controller.clear();
@@ -192,10 +193,4 @@ class _LocationSuggestionsPageState extends State<LocationSuggestionsPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: LocationSuggestionsPage(),
-  ));
 }

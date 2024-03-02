@@ -9,19 +9,25 @@ class CustomButton extends StatelessWidget {
       required this.ontap,
       required this.text,
       required this.buttonColor,
-      required this.textColor});
+      required this.textColor,
+      required this.bHeight,
+      required this.bWidth,
+      required this.fSize});
 
   final Size size;
   VoidCallback ontap;
   Color buttonColor;
   Color textColor;
   String text;
+  double bWidth;
+  double bHeight;
+  double fSize;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: size.width * 0.6,
-        height: 55,
+        width: bWidth,
+        height: bHeight,
         child: ElevatedButton(
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(buttonColor),
@@ -30,7 +36,7 @@ class CustomButton extends StatelessWidget {
           child: Center(
             child: CustomPoppinsText(
                 color: textColor,
-                fsize: 25,
+                fsize: fSize,
                 fweight: FontWeight.bold,
                 text: text),
           ),
