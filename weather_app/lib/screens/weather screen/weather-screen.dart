@@ -113,7 +113,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: size.height * 0.08),
+                      SizedBox(height: size.height * 0.05),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -210,105 +210,100 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.08,
+                        height: size.height * 0.06,
                       ),
-                      Expanded(
-                        child: Container(
-                          width: size.width,
-                          height: size.height * 0.25,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
-                            gradient: LinearGradient(colors: [
-                              Color.fromRGBO(40, 84, 228, 0.49),
-                              Color.fromRGBO(176, 54, 180, 0.49)
-                            ]),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, top: 4),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: CustomPoppinsText(
-                                              text: 'Today',
-                                              color: Colors.white,
-                                              fsize: 20,
-                                              fweight: FontWeight.w500),
-                                        ),
-                                        CustomPoppinsText(
-                                            text: nowDate,
+                      Container(
+                        width: size.width,
+                        height: size.height * 0.25,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          gradient: LinearGradient(colors: [
+                            Color.fromRGBO(40, 84, 228, 0.49),
+                            Color.fromRGBO(176, 54, 180, 0.49)
+                          ]),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8, right: 8, top: 4),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CustomPoppinsText(
+                                            text: 'Today',
                                             color: Colors.white,
                                             fsize: 20,
-                                            fweight: FontWeight.w500)
-                                      ],
-                                    ),
-                                  ),
-                                  const Divider()
-                                ],
-                              )),
-                              Expanded(
-                                flex: 2,
-                                child: ListView.builder(
-                                  itemCount:
-                                      24, // Adjust itemCount to 24 for 24 hours
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    // Calculate the hour dynamically
-                                    int hour =
-                                        (DateTime.now().hour + index) % 24;
-                                    // Format hour to ensure it's displayed as 1, 2, 3, ..., 24
-                                    String hourLabel =
-                                        hour == 0 ? '24' : hour.toString();
-
-                                    final hourlyWeather =
-                                        hourlyWeatherList[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SizedBox(
-                                        width: size.width * 0.2,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            CustomPoppinsText(
-                                              text:
-                                                  '$hourLabel:00', // Display hour label
-                                              color: Colors.white,
-                                              fsize: 14,
-                                              fweight: FontWeight.w500,
-                                            ),
-                                            Image.network(
-                                              'http://openweathermap.org/img/wn/${hourlyWeather['icon']}.png',
-                                            ),
-                                            CustomPoppinsText(
-                                              text:
-                                                  '${hourlyWeather['temperature']}°C',
-                                              color: Colors.white,
-                                              fsize: 18,
-                                              fweight: FontWeight.w500,
-                                            ),
-                                          ],
-                                        ),
+                                            fweight: FontWeight.w500),
                                       ),
-                                    );
-                                  },
+                                      CustomPoppinsText(
+                                          text: nowDate,
+                                          color: Colors.white,
+                                          fsize: 20,
+                                          fweight: FontWeight.w500)
+                                    ],
+                                  ),
                                 ),
+                                const Divider()
+                              ],
+                            )),
+                            Expanded(
+                              flex: 2,
+                              child: ListView.builder(
+                                itemCount:
+                                    24, // Adjust itemCount to 24 for 24 hours
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  // Calculate the hour dynamically
+                                  int hour = (DateTime.now().hour + index) % 24;
+                                  // Format hour to ensure it's displayed as 1, 2, 3, ..., 24
+                                  String hourLabel =
+                                      hour == 0 ? '24' : hour.toString();
+
+                                  final hourlyWeather =
+                                      hourlyWeatherList[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: size.width * 0.2,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          CustomPoppinsText(
+                                            text:
+                                                '$hourLabel:00', // Display hour label
+                                            color: Colors.white,
+                                            fsize: 14,
+                                            fweight: FontWeight.w500,
+                                          ),
+                                          Image.network(
+                                            'http://openweathermap.org/img/wn/${hourlyWeather['icon']}.png',
+                                          ),
+                                          CustomPoppinsText(
+                                            text:
+                                                '${hourlyWeather['temperature']}°C',
+                                            color: Colors.white,
+                                            fsize: 18,
+                                            fweight: FontWeight.w500,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       )
                     ],
